@@ -1,5 +1,5 @@
 def calculate_bags(small, big, total):
-    max_big_boxes = total / 5
+    max_big_boxes = int(total / 5)
     if max_big_boxes < big:
         big_boxes_we_can_use = max_big_boxes
     else:

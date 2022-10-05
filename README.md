@@ -59,7 +59,7 @@ To run a set of tests identified by a marker:
 > `$ pip-licenses --format=markdown --with-urls  --output-file=./licenses.md`
 
 
-
 --------
+
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
