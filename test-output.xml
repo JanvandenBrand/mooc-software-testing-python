@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.071" timestamp="2022-10-05T14:12:48.402663" hostname="LAPTOP-I0MC04RM"><testcase classname="tests.test_chocolate_bags" name="test_total_too_big" time="0.007" /></testsuite></testsuites>
