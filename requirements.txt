@@ -33,10 +33,16 @@ colorama==0.4.3
     # via awscli
 coverage[toml]==6.5.0
     # via pytest-cov
+distlib==0.3.6
+    # via virtualenv
 docutils==0.15.2
     # via
     #   awscli
     #   sphinx
+filelock==3.8.0
+    # via
+    #   tox
+    #   virtualenv
 flake8==4.0.1
     # via -r requirements.in
 gitdb==4.0.9
@@ -67,16 +73,23 @@ packaging==21.3
     # via
     #   pytest
     #   sphinx
+    #   tox
 pathspec==0.10.1
     # via black
 pbr==5.10.0
     # via stevedore
 platformdirs==2.5.2
-    # via black
+    # via
+    #   black
+    #   virtualenv
 pluggy==1.0.0
-    # via pytest
+    # via
+    #   pytest
+    #   tox
 py==1.11.0
-    # via pytest
+    # via
+    #   pytest
+    #   tox
 pyasn1==0.4.8
     # via rsa
 pycodestyle==2.8.0
@@ -113,7 +126,9 @@ rsa==4.7.2
 s3transfer==0.5.2
     # via awscli
 six==1.16.0
-    # via python-dateutil
+    # via
+    #   python-dateutil
+    #   tox
 smmap==5.0.0
     # via gitdb
 snowballstemmer==2.2.0
@@ -140,11 +155,16 @@ tomli==2.0.1
     # via
     #   black
     #   coverage
+    #   tox
+tox==3.26.0
+    # via -r requirements.in
 typing-extensions==4.3.0
     # via black
 urllib3==1.26.12
     # via
     #   botocore
     #   requests
+virtualenv==20.16.5
+    # via tox
 zipp==3.8.1
     # via importlib-metadata

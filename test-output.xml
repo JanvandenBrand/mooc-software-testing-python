@@ -1,1 +1,423 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="2" time="0.113" timestamp="2022-10-10T21:27:25.299148" hostname="LAPTOP-I0MC04RM"><testcase classname="tests.test_blackjack" name="test_play[Both left and right bust]" time="0.004" /><testcase classname="tests.test_blackjack" name="test_play[Left wins]" time="0.001" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="42" time="0.290" timestamp="2022-10-11T20:41:26.569977" hostname="LAPTOP-I0MC04RM"><testcase classname="tests.test_blackjack" name="test_play[Both left and right bust]" time="0.002" /><testcase classname="tests.test_blackjack" name="test_play[Left wins]" time="0.001" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[letter shifts right between a and z]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[letter shifts left between z and a]" time="0.002"><failure message="IndexError: list index out of range">message = 'nop', shift = -3, result = 'klm'
+
+    @pytest.mark.parametrize("message, shift, result",
+        [
+            pytest.param(
+                'abc', 3, 'def',
+                id="letter shifts right between a and z"
+            ),
+            pytest.param(
+                'nop', -3, 'klm',
+                id="letter shifts left between z and a"
+            ),
+            pytest.param(
+                'xyz', 3, 'abc',
+                id="letter shifts right past z"
+            ),
+            pytest.param(
+                'abc', -3, 'xyz',
+                id="letter shifts left past a"
+            ),
+            pytest.param(
+                'abc', -1, 'zab',
+                id="a out boundry"
+            ),
+            pytest.param(
+                'xyz', +1, 'yza',
+                id="z out boundry"
+            ),
+            pytest.param(
+                'a', 25, 'z',
+                id='a in boundry'
+            ),
+            pytest.param(
+                'z', -25, 'a',
+                id='z in boundry'
+            ),
+            pytest.param(
+                'abc', 0, 'abc',
+                id="zero shift"
+            )
+        ]
+    )
+    def test_caesarshiftcipher(message, shift, result):
+        expected = result
+&gt;       actual = caesarshiftcipher(message, shift)
+
+tests/test_caesarshift.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = 'nop', shift = 23
+
+    def caesarshiftcipher(message, shift):
+        """
+        This implementation close follows the (faulty) java
+        example from the MOOC and should fail.
+        """
+        sb = []
+        current_char = []
+        length = len(message)
+        letters = list(ascii_lowercase)
+    
+        shift = shift % 26
+    
+        for i in range(0, length):
+            current_char = [
+                j for j in range(len(list(ascii_lowercase)))
+                if list(ascii_lowercase)[j] == message[i]][0]
+    
+            if (letters[current_char] &gt; 'z' or letters[current_char] &lt; 'a'):
+                return 'invalid'
+&gt;           elif (letters[current_char + shift] &gt; 'z'):
+E           IndexError: list index out of range
+
+src/caesarshift.py:23: IndexError</failure></testcase><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[letter shifts right past z]" time="0.003"><failure message="IndexError: list index out of range">message = 'xyz', shift = 3, result = 'abc'
+
+    @pytest.mark.parametrize("message, shift, result",
+        [
+            pytest.param(
+                'abc', 3, 'def',
+                id="letter shifts right between a and z"
+            ),
+            pytest.param(
+                'nop', -3, 'klm',
+                id="letter shifts left between z and a"
+            ),
+            pytest.param(
+                'xyz', 3, 'abc',
+                id="letter shifts right past z"
+            ),
+            pytest.param(
+                'abc', -3, 'xyz',
+                id="letter shifts left past a"
+            ),
+            pytest.param(
+                'abc', -1, 'zab',
+                id="a out boundry"
+            ),
+            pytest.param(
+                'xyz', +1, 'yza',
+                id="z out boundry"
+            ),
+            pytest.param(
+                'a', 25, 'z',
+                id='a in boundry'
+            ),
+            pytest.param(
+                'z', -25, 'a',
+                id='z in boundry'
+            ),
+            pytest.param(
+                'abc', 0, 'abc',
+                id="zero shift"
+            )
+        ]
+    )
+    def test_caesarshiftcipher(message, shift, result):
+        expected = result
+&gt;       actual = caesarshiftcipher(message, shift)
+
+tests/test_caesarshift.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = 'xyz', shift = 3
+
+    def caesarshiftcipher(message, shift):
+        """
+        This implementation close follows the (faulty) java
+        example from the MOOC and should fail.
+        """
+        sb = []
+        current_char = []
+        length = len(message)
+        letters = list(ascii_lowercase)
+    
+        shift = shift % 26
+    
+        for i in range(0, length):
+            current_char = [
+                j for j in range(len(list(ascii_lowercase)))
+                if list(ascii_lowercase)[j] == message[i]][0]
+    
+            if (letters[current_char] &gt; 'z' or letters[current_char] &lt; 'a'):
+                return 'invalid'
+&gt;           elif (letters[current_char + shift] &gt; 'z'):
+E           IndexError: list index out of range
+
+src/caesarshift.py:23: IndexError</failure></testcase><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[letter shifts left past a]" time="0.001" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[a out boundry]" time="0.002"><failure message="IndexError: list index out of range">message = 'abc', shift = -1, result = 'zab'
+
+    @pytest.mark.parametrize("message, shift, result",
+        [
+            pytest.param(
+                'abc', 3, 'def',
+                id="letter shifts right between a and z"
+            ),
+            pytest.param(
+                'nop', -3, 'klm',
+                id="letter shifts left between z and a"
+            ),
+            pytest.param(
+                'xyz', 3, 'abc',
+                id="letter shifts right past z"
+            ),
+            pytest.param(
+                'abc', -3, 'xyz',
+                id="letter shifts left past a"
+            ),
+            pytest.param(
+                'abc', -1, 'zab',
+                id="a out boundry"
+            ),
+            pytest.param(
+                'xyz', +1, 'yza',
+                id="z out boundry"
+            ),
+            pytest.param(
+                'a', 25, 'z',
+                id='a in boundry'
+            ),
+            pytest.param(
+                'z', -25, 'a',
+                id='z in boundry'
+            ),
+            pytest.param(
+                'abc', 0, 'abc',
+                id="zero shift"
+            )
+        ]
+    )
+    def test_caesarshiftcipher(message, shift, result):
+        expected = result
+&gt;       actual = caesarshiftcipher(message, shift)
+
+tests/test_caesarshift.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = 'abc', shift = 25
+
+    def caesarshiftcipher(message, shift):
+        """
+        This implementation close follows the (faulty) java
+        example from the MOOC and should fail.
+        """
+        sb = []
+        current_char = []
+        length = len(message)
+        letters = list(ascii_lowercase)
+    
+        shift = shift % 26
+    
+        for i in range(0, length):
+            current_char = [
+                j for j in range(len(list(ascii_lowercase)))
+                if list(ascii_lowercase)[j] == message[i]][0]
+    
+            if (letters[current_char] &gt; 'z' or letters[current_char] &lt; 'a'):
+                return 'invalid'
+&gt;           elif (letters[current_char + shift] &gt; 'z'):
+E           IndexError: list index out of range
+
+src/caesarshift.py:23: IndexError</failure></testcase><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[z out boundry]" time="0.002"><failure message="IndexError: list index out of range">message = 'xyz', shift = 1, result = 'yza'
+
+    @pytest.mark.parametrize("message, shift, result",
+        [
+            pytest.param(
+                'abc', 3, 'def',
+                id="letter shifts right between a and z"
+            ),
+            pytest.param(
+                'nop', -3, 'klm',
+                id="letter shifts left between z and a"
+            ),
+            pytest.param(
+                'xyz', 3, 'abc',
+                id="letter shifts right past z"
+            ),
+            pytest.param(
+                'abc', -3, 'xyz',
+                id="letter shifts left past a"
+            ),
+            pytest.param(
+                'abc', -1, 'zab',
+                id="a out boundry"
+            ),
+            pytest.param(
+                'xyz', +1, 'yza',
+                id="z out boundry"
+            ),
+            pytest.param(
+                'a', 25, 'z',
+                id='a in boundry'
+            ),
+            pytest.param(
+                'z', -25, 'a',
+                id='z in boundry'
+            ),
+            pytest.param(
+                'abc', 0, 'abc',
+                id="zero shift"
+            )
+        ]
+    )
+    def test_caesarshiftcipher(message, shift, result):
+        expected = result
+&gt;       actual = caesarshiftcipher(message, shift)
+
+tests/test_caesarshift.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = 'xyz', shift = 1
+
+    def caesarshiftcipher(message, shift):
+        """
+        This implementation close follows the (faulty) java
+        example from the MOOC and should fail.
+        """
+        sb = []
+        current_char = []
+        length = len(message)
+        letters = list(ascii_lowercase)
+    
+        shift = shift % 26
+    
+        for i in range(0, length):
+            current_char = [
+                j for j in range(len(list(ascii_lowercase)))
+                if list(ascii_lowercase)[j] == message[i]][0]
+    
+            if (letters[current_char] &gt; 'z' or letters[current_char] &lt; 'a'):
+                return 'invalid'
+&gt;           elif (letters[current_char + shift] &gt; 'z'):
+E           IndexError: list index out of range
+
+src/caesarshift.py:23: IndexError</failure></testcase><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[a in boundry]" time="0.001" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[z in boundry]" time="0.002"><failure message="IndexError: list index out of range">message = 'z', shift = -25, result = 'a'
+
+    @pytest.mark.parametrize("message, shift, result",
+        [
+            pytest.param(
+                'abc', 3, 'def',
+                id="letter shifts right between a and z"
+            ),
+            pytest.param(
+                'nop', -3, 'klm',
+                id="letter shifts left between z and a"
+            ),
+            pytest.param(
+                'xyz', 3, 'abc',
+                id="letter shifts right past z"
+            ),
+            pytest.param(
+                'abc', -3, 'xyz',
+                id="letter shifts left past a"
+            ),
+            pytest.param(
+                'abc', -1, 'zab',
+                id="a out boundry"
+            ),
+            pytest.param(
+                'xyz', +1, 'yza',
+                id="z out boundry"
+            ),
+            pytest.param(
+                'a', 25, 'z',
+                id='a in boundry'
+            ),
+            pytest.param(
+                'z', -25, 'a',
+                id='z in boundry'
+            ),
+            pytest.param(
+                'abc', 0, 'abc',
+                id="zero shift"
+            )
+        ]
+    )
+    def test_caesarshiftcipher(message, shift, result):
+        expected = result
+&gt;       actual = caesarshiftcipher(message, shift)
+
+tests/test_caesarshift.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = 'z', shift = 1
+
+    def caesarshiftcipher(message, shift):
+        """
+        This implementation close follows the (faulty) java
+        example from the MOOC and should fail.
+        """
+        sb = []
+        current_char = []
+        length = len(message)
+        letters = list(ascii_lowercase)
+    
+        shift = shift % 26
+    
+        for i in range(0, length):
+            current_char = [
+                j for j in range(len(list(ascii_lowercase)))
+                if list(ascii_lowercase)[j] == message[i]][0]
+    
+            if (letters[current_char] &gt; 'z' or letters[current_char] &lt; 'a'):
+                return 'invalid'
+&gt;           elif (letters[current_char + shift] &gt; 'z'):
+E           IndexError: list index out of range
+
+src/caesarshift.py:23: IndexError</failure></testcase><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher[zero shift]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[letter shifts right between a and z]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[letter shifts left between z and a]" time="0.003" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[letter shifts right past z]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[letter shifts left past a]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[a out boundry]" time="0.001" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[z out boundry]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[a in boundry]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[z in boundry]" time="0.002" /><testcase classname="tests.test_caesarshift" name="test_caesarshiftcipher_fixed[zero shift]" time="0.002" /><testcase classname="tests.test_chocolate_bags" name="test_total_too_big" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_only_big" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_big_and_small" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_only_small" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags[1-1-17--1]" time="0.004" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags[1-3-10-0]" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags[5-3-17-2]" time="0.003" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags[5-2-3-3]" time="0.002" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags_with_id[Total is higher than small + big]" time="0.002" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags_with_id[Only big bags]" time="0.002" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags_with_id[Both big and small bags]" time="0.001" /><testcase classname="tests.test_chocolate_bags" name="test_calculate_bags_with_id[Only small bags]" time="0.002" /><testcase classname="tests.test_ghappy" name="test_ghappy[there is only one g]" time="0.002" /><testcase classname="tests.test_ghappy" name="test_ghappy[there are two g's but separated]" time="0.001" /><testcase classname="tests.test_ghappy" name="test_ghappy[there are two g's next to each other]" time="0.003" /><testcase classname="tests.test_ghappy" name="test_ghappy[there are three g's next to each other]" time="0.001" /><testcase classname="tests.test_ghappy" name="test_ghappy[there are two g's next to each other and a 3rd is not]" time="0.001" /><testcase classname="tests.test_ghappy" name="test_ghappy[String length is 1 g]" time="0.002"><failure message="AssertionError: Expected False, but ghappy('g') returned True)&#10;assert False == True&#10;  +False&#10;  -True">string = 'g', result = False
+
+    @pytest.mark.parametrize("string, result",
+        [
+            pytest.param(
+                "xxgxx", False,
+                id="there is only one g"
+            ),
+            pytest.param(
+                "xgxgx", False,
+                id="there are two g's but separated"
+            ),
+            pytest.param(
+                "xxggx", True,
+                id="there are two g's next to each other"
+            ),
+            pytest.param(
+                "xgggx", True,
+                id="there are three g's next to each other"
+            ),
+            pytest.param(
+                "xggxgx", False,
+                id="there are two g's next to each other and a 3rd is not"
+            ),
+            pytest.param(
+                "g", False,
+                id="String length is 1 g"
+            ),
+            pytest.param(
+                "gg", True,
+                id="String length is 2 g"
+            ),
+            pytest.param(
+                "xgg", True,
+                id="String length is 3 with two continguent g's"
+            ),
+            pytest.param(
+                "ggxxxx", True,
+                id="The g's are at the start of the string"
+            ),
+            pytest.param(
+                "xxxgg", True,
+                id="The g's are at the end of the string"
+            )
+        ]
+    )
+    def test_ghappy(string, result):
+        actual = ghappy(string)
+        expected = result
+        message = "Expected {0}, but ghappy('{1}') returned {2})"\
+            .format(expected, string, actual)
+&gt;       assert expected == actual, message
+E       AssertionError: Expected False, but ghappy('g') returned True)
+E       assert False == True
+E         +False
+E         -True
+
+tests/test_ghappy.py:75: AssertionError</failure></testcase><testcase classname="tests.test_ghappy" name="test_ghappy[String length is 2 g]" time="0.002" /><testcase classname="tests.test_ghappy" name="test_ghappy[String length is 3 with two continguent g's]" time="0.001" /><testcase classname="tests.test_ghappy" name="test_ghappy[The g's are at the start of the string]" time="0.002" /><testcase classname="tests.test_ghappy" name="test_ghappy[The g's are at the end of the string]" time="0.003" /></testsuite></testsuites>
