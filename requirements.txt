@@ -32,7 +32,9 @@ click==8.0.3
 colorama==0.4.3
     # via awscli
 coverage[toml]==6.5.0
-    # via pytest-cov
+    # via
+    #   -r requirements.in
+    #   pytest-cov
 distlib==0.3.6
     # via virtualenv
 docutils==0.15.2
