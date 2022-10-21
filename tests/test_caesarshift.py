@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath("./src/"))
 from caesarshift import (
-    caesarshiftcipher,
+    # caesarshiftcipher,
     caesarshiftcipher_fixed
 )
 
@@ -20,94 +20,52 @@ from caesarshift import (
 # zero shift
 
 
-@pytest.mark.parametrize("message, shift, result",
-    [
-        pytest.param(
-            'abc', 3, 'def',
-            id="letter shifts right between a and z"
-        ),
-        pytest.param(
-            'nop', -3, 'klm',
-            id="letter shifts left between z and a"
-        ),
-        pytest.param(
-            'xyz', 3, 'abc',
-            id="letter shifts right past z"
-        ),
-        pytest.param(
-            'abc', -3, 'xyz',
-            id="letter shifts left past a"
-        ),
-        pytest.param(
-            'abc', -1, 'zab',
-            id="a out boundry"
-        ),
-        pytest.param(
-            'xyz', +1, 'yza',
-            id="z out boundry"
-        ),
-        pytest.param(
-            'a', 25, 'z',
-            id='a in boundry'
-        ),
-        pytest.param(
-            'z', -25, 'a',
-            id='z in boundry'
-        ),
-        pytest.param(
-            'abc', 0, 'abc',
-            id="zero shift"
-        )
-    ]
-)
-def test_caesarshiftcipher(message, shift, result):
-    expected = result
-    actual = caesarshiftcipher(message, shift)
-    message = "Expected {0}, but caesarshiftcipher({1}, {2},\
-        returned {3}".format(expected, message, shift, actual)
-    assert expected == actual
+@pytest.mark.parametrize("message, shift, result", [
+    pytest.param(
+        'abc', 3, 'def',
+        id="letter shifts right between a and z"
+    ),
+    pytest.param(
+        'nop', -3, 'klm',
+        id="letter shifts left between z and a"
+    ),
+    pytest.param(
+        'xyz', 3, 'abc',
+        id="letter shifts right past z"
+    ),
+    pytest.param(
+        'abc', -3, 'xyz',
+        id="letter shifts left past a"
+    ),
+    pytest.param(
+        'abc', -1, 'zab',
+        id="a out boundry"
+    ),
+    pytest.param(
+        'xyz', +1, 'yza',
+        id="z out boundry"
+    ),
+    pytest.param(
+        'a', 25, 'z',
+        id='a in boundry'
+    ),
+    pytest.param(
+        'z', -25, 'a',
+        id='z in boundry'
+    ),
+    pytest.param(
+        'abc', 0, 'abc',
+        id="zero shift"
+    )
+])
+# def test_caesarshiftcipher(message, shift, result):
+#     expected = result
+#     actual = caesarshiftcipher(message, shift)
+#     message = "Expected {0}, but caesarshiftcipher({1}, {2},\
+#         returned {3}".format(expected, message, shift, actual)
+#     assert expected == actual
 
 
-@pytest.mark.parametrize("message, shift, result",
-    [
-        pytest.param(
-            'abc', 3, 'def',
-            id="letter shifts right between a and z"
-        ),
-        pytest.param(
-            'nop', -3, 'klm',
-            id="letter shifts left between z and a"
-        ),
-        pytest.param(
-            'xyz', 3, 'abc',
-            id="letter shifts right past z"
-        ),
-        pytest.param(
-            'abc', -3, 'xyz',
-            id="letter shifts left past a"
-        ),
-        pytest.param(
-            'abc', -1, 'zab',
-            id="a out boundry"
-        ),
-        pytest.param(
-            'xyz', +1, 'yza',
-            id="z out boundry"
-        ),
-        pytest.param(
-            'a', 25, 'z',
-            id='a in boundry'
-        ),
-        pytest.param(
-            'z', -25, 'a',
-            id='z in boundry'
-        ),
-        pytest.param(
-            'abc', 0, 'abc',
-            id="zero shift"
-        )
-    ]
-)
 def test_caesarshiftcipher_fixed(message, shift, result):
     expected = result
     actual = caesarshiftcipher_fixed(message, shift)
