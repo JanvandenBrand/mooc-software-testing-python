@@ -21,7 +21,7 @@ def count_letters(string):
 
         last = string[i]
 
-    if (last == "r" or last == "s"): # r was an x
+    if (last == "r" or last == "s"):  # r was an x
         words += 1
 
     return words

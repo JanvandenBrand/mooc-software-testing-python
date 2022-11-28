@@ -23,50 +23,48 @@ from ghappy import ghappy
 # The g's are at the end of the string - true
 
 
-@pytest.mark.parametrize("string, result",
-    [
-        pytest.param(
-            "xxgxx", False,
-            id="there is only one g"
-        ),
-        pytest.param(
-            "xgxgx", False,
-            id="there are two g's but separated"
-        ),
-        pytest.param(
-            "xxggx", True,
-            id="there are two g's next to each other"
-        ),
-        pytest.param(
-            "xgggx", True,
-            id="there are three g's next to each other"
-        ),
-        pytest.param(
-            "xggxgx", False,
-            id="there are two g's next to each other and a 3rd is not"
-        ),
-        pytest.param(
-            "g", False,
-            id="String length is 1 g"
-        ),
-        pytest.param(
-            "gg", True,
-            id="String length is 2 g"
-        ),
-        pytest.param(
-            "xgg", True,
-            id="String length is 3 with two continguent g's"
-        ),
-        pytest.param(
-            "ggxxxx", True,
-            id="The g's are at the start of the string"
-        ), 
-        pytest.param(
-            "xxxgg", True,
-            id="The g's are at the end of the string"
-        )
-    ]
-)
+@pytest.mark.parametrize("string, result", [
+    pytest.param(
+        "xxgxx", False,
+        id="there is only one g"
+    ),
+    pytest.param(
+        "xgxgx", False,
+        id="there are two g's but separated"
+    ),
+    pytest.param(
+        "xxggx", True,
+        id="there are two g's next to each other"
+    ),
+    pytest.param(
+        "xgggx", True,
+        id="there are three g's next to each other"
+    ),
+    pytest.param(
+        "xggxgx", False,
+        id="there are two g's next to each other and a 3rd is not"
+    ),
+    pytest.param(
+        "g", False,
+        id="String length is 1 g"
+    ),
+    pytest.param(
+        "gg", True,
+        id="String length is 2 g"
+    ),
+    pytest.param(
+        "xgg", True,
+        id="String length is 3 with two continguent g's"
+    ),
+    pytest.param(
+        "ggxxxx", True,
+        id="The g's are at the start of the string"
+    ), 
+    pytest.param(
+        "xxxgg", True,
+        id="The g's are at the end of the string"
+    )
+])
 def test_ghappy(string, result):
     actual = ghappy(string)
     expected = result
