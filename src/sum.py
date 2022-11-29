@@ -1,15 +1,8 @@
 from typing import Optional
 
-
-class ListNode(object):
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-
 # Taken from https://leetcode.com/problems/add-two-numbers/solution/
 class TwoNumberSum:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers(self, l1: Optional[list], l2: Optional[list]) -> Optional[list]:
         """_summary_
 
         Args:
@@ -19,17 +12,26 @@ class TwoNumberSum:
         Returns:
             Optional[ListNode]: _description_
         """
-        dummyHead = ListNode(0)
-        curr = dummyHead
+        l1.reverse()
+        l2.reverse()
         carry = 0
-        while l1 != None or l2 != None or carry != 0:
-            l1Val = l1.val if l1 else 0
-            l2Val = l2.val if l2 else 0
-            columnSum = l1Val + l2Val + carry
-            carry = columnSum // 10
-            newNode = ListNode(columnSum % 10)
-            curr.next = newNode
-            curr = newNode
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
-        return dummyHead.next
+        result = []
+
+        for i in range(max(len(l1), len(l2))):
+            if i < len(l1):
+                first_value = l1[i]
+            else:
+                first_value = 0
+            if i < len(l2):
+                second_value = l2[i]
+            else:
+                second_value = 0
+            column_sum = first_value + second_value + carry
+            carry = 0
+            if column_sum >= 10:
+                carry = 1
+                column_sum -= 10
+            result.append(column_sum)
+
+        result.reverse()
+        return result
